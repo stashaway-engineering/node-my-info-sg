@@ -41,20 +41,23 @@ Lightly refactored from the [excellent official example](https://github.com/ndi-
 1. **Generate the OAuth2 url**
 
 	```js
-	var authoriseUrl = myInfoClient.getAuthoriseUrl(purpose, attributes);
-	// Then pass this to the frontend, and redirect them 
-	// (or open it on a webview for your mobile app)
+	var { authoriseUrl, state } = myInfoClient.getAuthoriseUrl(purpose, attributes);
+	// Then you can pass authoriseUrl to your frontend app and redirect the user 
+	// (or open authoriseUrl on a WebView on your mobile apps)
+	//
+	// Note: You might want to store authoriseUrl, attributes, and state to fulfill the transaction log requirements
+	// https://www.ndi-api.gov.sg/library/trusted-data/myinfo/implementation-technical-requirements
 	```
 
 1. **Get the person object**
 
-	```js
-	myInfoClient.getToken(code) // Exchange authorisation code with usable access token
-    .then((accessToken) => myInfoClient.getPerson(accessToken, _attributes)) // Get the person object
-    .then((personData) => {
-      console.log("Person Data:");
-      console.log(JSON.stringify(personData))
-    });
+	```js	
+	// Exchange authorisation code with usable access token
+	myInfoClient.getToken(code)
+		// Get the person object
+		.then(({ accessToken }) => myInfoClient.getPerson(accessToken, _attributes)) 
+		// Now you can use the person object to pre-fill your form!
+		.then(({ person }) => console.log(JSON.stringify(person))); 
 	```
 	
 ## Example

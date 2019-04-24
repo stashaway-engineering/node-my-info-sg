@@ -72,7 +72,7 @@ router.get('/callback', function(req, res, next) {
 router.get('/getAuthoriseUrl', function(req, res, next) {
   var purpose = 'demonstrating MyInfo APIs'
   var attributes = _attributes;
-  var authoriseUrl = myInfoClient.getAuthoriseUrl(purpose, attributes);
+  var { authoriseUrl } = myInfoClient.getAuthoriseUrl(purpose, attributes);
   
   res.jsonp({
     status: "OK",
@@ -89,13 +89,13 @@ router.post('/getPersonData', function(req, res, next) {
   var request;
   
   myInfoClient.getToken(code)
-    .then(function(accessToken) {
+    .then(function({ accessToken }) {
       return myInfoClient.getPerson(accessToken, _attributes);
     })
-    .then(function(personData) {
-      console.log("Person Data (Decoded):".green);
-      console.log(JSON.stringify(personData))
-      res.jsonp({ status: "OK", text: personData });
+    .then(function({ person }) {
+      console.log("Person Data:".green);
+      console.log(JSON.stringify(person))
+      res.jsonp({ status: "OK", text: person });
     })
     .catch(function(error) {
       console.error(error);
