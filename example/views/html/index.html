@@ -17,47 +17,30 @@
 		// SETUP VARIABLES
         var scrollToAppForm = false;
 
-        // Variables for API #1 - Authorise API
-        var authApiUrl; // URL for authorise API
-        var clientId; 	// your app_id/client_id provided to you during onboarding
-        var redirectUrl; //callback url for your application
+        var authoriseUrl; // URL for authorise API
 
-        var attributes;  // the attributes you are retrieving for your application to fill the form
-        var authLevel; // the auth level, determines the flow
-        // the purpose of your data retrieval
-        var purpose = "demonstrating MyInfo APIs";
-
-        // randomly generated state
-        var state = "123";
-
-		window.onload = function(e){
-	    	// invoke AJAX call to get the clientId & redirectURL from serverside
+				window.onload = function(e){
+	    	// invoke AJAX call to get the authoriseUrl from serverside
 	        $.ajax({
-	            url: "/getEnv",
+	            url: "/getAuthoriseUrl",
 	            data: {
 	            },
 	            type: "GET", // get from serverside
 	            success: function (data) {
 	            	// successful response from serverside
-					if (data.status == "OK") { // successful
-						// fill up the application form
-						clientId = data.clientId;
-						redirectUrl = data.redirectUrl;
-						authApiUrl = data.authApiUrl;
-						attributes = data.attributes;
-						authLevel = data.authLevel;
-					} else {
-						// error occured
-						alert("ERROR:"+JSON.stringify(data.msg));
-					}
-
+								if (data.status == "OK") { // successful
+									// Store authoriseUrl
+									authoriseUrl = data.authoriseUrl;
+								} else {
+									// error occured
+									alert("ERROR:"+JSON.stringify(data.msg));
+								}
 	            }
 	        });
  		}
 
         // main function for handling form events
         $(function() {
-
             $("#formAuthorise").submit(function(event){
                 event.preventDefault();
                 callAuthoriseApi();
@@ -72,13 +55,7 @@
 
         // Function for calling API #1 - Authorise
         function callAuthoriseApi() {
-            var authoriseUrl = authApiUrl + "?client_id=" + clientId
-            	+ "&attributes="+ attributes
-            	+ "&purpose=" + purpose
-            	+ "&state=" + state
-            	+ "&redirect_uri=" + redirectUrl;
-
-			window.location = authoriseUrl;
+					window.location = authoriseUrl;
         }
 
 
@@ -384,7 +361,7 @@
 			}, 500);
 		}
 
-		if (authLevel == 'L0') {
+		if (!!authoriseUrl) {
 			$("#formPerson").show();
 		} else {
 			$("#formPerson").hide();

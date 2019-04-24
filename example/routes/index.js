@@ -19,26 +19,32 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // Setup Configuration
 // ####################
 
-// LOADED FRON ENV VARIABLE: public key from MyInfo Consent Platform given to you during onboarding for RSA digital signature
-var _publicCertContent = process.env.MYINFO_SIGNATURE_CERT_PUBLIC_CERT;
-// LOADED FRON ENV VARIABLE: your private key for RSA digital signature
-var _privateKeyContent = process.env.DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY;
-// LOADED FRON ENV VARIABLE: your client_id provided to you during onboarding
-var _clientId = process.env.MYINFO_APP_CLIENT_ID;
-// LOADED FRON ENV VARIABLE: your client_secret provided to you during onboarding
-var _clientSecret = process.env.MYINFO_APP_CLIENT_SECRET;
-// redirect URL for your web application
-var _redirectUrl = process.env.MYINFO_APP_REDIRECT_URL;
-
-
-// URLs for MyInfo APIs
-var _authLevel = process.env.AUTH_LEVEL;
-
-var _authApiUrl = process.env.MYINFO_API_AUTHORISE;
-var _tokenApiUrl = process.env.MYINFO_API_TOKEN;
-var _personApiUrl = process.env.MYINFO_API_PERSON;
-
 var _attributes = "uinfin,name,sex,race,nationality,dob,email,mobileno,regadd,housingtype,hdbtype,marital,edulevel,noa-basic,ownerprivate,cpfcontributions,cpfbalances";
+
+const myInfoClient = new MyInfoClient({
+  // MyInfo API base URL (sandbox/test/production)
+  // https://www.ndi-api.gov.sg/assets/lib/trusted-data/myinfo/specs/myinfo-kyc-v3.0.1.yaml.html#section/Environments/Available-Environments
+  baseUrl: process.env.MYINFO_API_BASE_URL,
+  
+  // Api auth level (L0 for sandbox; Otherwise L2)
+  authLevel: process.env.AUTH_LEVEL,
+  
+  // Public key from MyInfo Consent Platform given to you during onboarding for RSA digital signature
+  publicCertContent: process.env.MYINFO_SIGNATURE_CERT_PUBLIC_CERT,
+  
+  // Your private key for RSA digital signature
+  privateKeyContent: process.env.DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY,
+  
+  // Your client_id provided to you during onboarding
+  clientId: process.env.MYINFO_APP_CLIENT_ID,
+  
+  // Your client_secret provided to you during onboarding
+  clientSecret: process.env.MYINFO_APP_CLIENT_SECRET,
+  
+  // Redirect URL for your web application
+  // https://www.ndi-api.gov.sg/library/trusted-data/myinfo/implementation-technical-requirements (Callback URLs)
+  redirectUrl: process.env.MYINFO_APP_REDIRECT_URL,
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -51,21 +57,15 @@ router.get('/callback', function(req, res, next) {
 });
 
 // function for getting environment variables to the frontend
-router.get('/getEnv', function(req, res, next) {
-  if (_clientId == undefined || _clientId == null)
-    res.jsonp({
-      status: "ERROR",
-      msg: "client_id not found"
-    });
-  else
-    res.jsonp({
-      status: "OK",
-      clientId: _clientId,
-      redirectUrl: _redirectUrl,
-      authApiUrl: _authApiUrl,
-      attributes: _attributes,
-      authLevel: _authLevel
-    });
+router.get('/getAuthoriseUrl', function(req, res, next) {
+  var purpose = 'demonstrating MyInfo APIs'
+  var attributes = _attributes;
+  var authoriseUrl = myInfoClient.getAuthoriseUrl(purpose, attributes);
+  
+  res.jsonp({
+    status: "OK",
+    authoriseUrl,
+  });
 });
 
 // function for frontend to call backend
@@ -75,16 +75,6 @@ router.post('/getPersonData', function(req, res, next) {
 
   var data;
   var request;
-
-  var myInfoClient = new MyInfoClient({
-    baseUrl: 'https://sandbox.api.myinfo.gov.sg',
-    authLevel: _authLevel,
-    clientId: _clientId,
-    clientSecret: _clientSecret,
-    privateKeyContent: _privateKeyContent,
-    publicCertContent: _publicCertContent,
-    redirectUrl: _redirectUrl,
-  });
   
   myInfoClient.getToken(code)
     .then(function(accessToken) {
