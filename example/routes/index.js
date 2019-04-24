@@ -1,15 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const MyInfoClient = require('my-info-sg');
-const restClient = require('superagent-bluebird-promise');
+const MyInfoClient = require('node-my-info-sg');
 const path = require('path');
-const url = require('url');
-const util = require('util');
-const Promise = require('bluebird');
-const _ = require('lodash');
-const querystring = require('querystring');
-const crypto = require('crypto');
 const colors = require('colors');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";

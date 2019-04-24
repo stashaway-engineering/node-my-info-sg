@@ -1,5 +1,5 @@
 {
-  "name": "my-info-sg",
+  "name": "node-my-info-sg",
   "version": "1.0.0",
   "description": "",
   "main": "lib/client.js",
@@ -14,6 +14,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
     "node": "^11.14.0",
+    "node-jose": "^1.1.3",
     "nonce": "^1.0.4",
     "querystring": "^0.2.0",
     "superagent": "^5.0.2",

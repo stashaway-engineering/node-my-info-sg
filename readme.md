@@ -10,7 +10,7 @@ Lightly refactored from the [excellent official example](https://github.com/ndi-
 1. **Initialise MyInfoClient**
 
 	```js
-	const MyInfoClient = require('my-info-sg');
+	const MyInfoClient = require('node-my-info-sg');
 
 	const myInfoClient = new MyInfoClient({
 	  // MyInfo API base URL (sandbox/test/production)
