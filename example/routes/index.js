@@ -12,7 +12,26 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // Setup Configuration
 // ####################
 
-var _attributes = "uinfin,name,sex,race,nationality,dob,email,mobileno,regadd,housingtype,hdbtype,marital,edulevel,noa-basic,ownerprivate,cpfcontributions,cpfbalances";
+var _attributes = [
+  'uinfin', 
+  'name', 
+  'sex', 
+  'race', 
+  'nationality', 
+  'dob', 
+  'email', 
+  'mobileno', 
+  'regadd', 
+  'housingtype', 
+  'hdbtype', 
+  'marital', 
+  'edulevel', 
+  'noa-basic', 
+  'ownerprivate',
+  'cpfcontributions',
+  'cpfbalances',
+];
+
 
 const myInfoClient = new MyInfoClient({
   // MyInfo API base URL (sandbox/test/production)
