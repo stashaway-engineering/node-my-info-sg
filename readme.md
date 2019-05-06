@@ -21,10 +21,10 @@ Lightly refactored from the [excellent official example](https://github.com/ndi-
 	  authLevel: 'L0',
 	  
 	  // Public key from MyInfo Consent Platform given to you during onboarding for RSA digital signature
-	  publicCertContent: './ssl/stg-auth-signing-public.pem',
+	  publicCertPath: './ssl/stg-auth-signing-public.pem',
 	  
 	  // Your private key for RSA digital signature
-	  privateKeyContent: './ssl/stg-demoapp-client-privatekey-2018.pem',
+	  privateKeyPath: './ssl/stg-demoapp-client-privatekey-2018.pem',
 	  
 	  // Your client_id provided to you during onboarding
 	  clientId: 'STG2-MYINFO-SELF-TEST',

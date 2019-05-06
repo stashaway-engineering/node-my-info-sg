@@ -42,10 +42,10 @@ const myInfoClient = new MyInfoClient({
   authLevel: process.env.AUTH_LEVEL,
   
   // Public key from MyInfo Consent Platform given to you during onboarding for RSA digital signature
-  publicCertContent: process.env.MYINFO_SIGNATURE_CERT_PUBLIC_CERT,
+  publicCertPath: process.env.MYINFO_SIGNATURE_CERT_PUBLIC_CERT,
   
   // Your private key for RSA digital signature
-  privateKeyContent: process.env.DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY,
+  privateKeyPath: process.env.DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY,
   
   // Your client_id provided to you during onboarding
   clientId: process.env.MYINFO_APP_CLIENT_ID,
