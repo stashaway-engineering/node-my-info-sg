@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage --collectCoverageFrom='[\"**/src/**/*.js\", \"!**/examples/**\",\"!**/components/**\",\"!**/constants/**\"]'",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "eslint --ext .js ."
   },
   "author": "StashAway",
   "repository": {
@@ -29,6 +30,12 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
     "jest": "^24.8.0",
     "jest-watch-typeahead": "^0.3.1",
     "puppeteer": "^1.15.0",
