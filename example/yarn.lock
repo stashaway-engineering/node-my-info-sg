@@ -83,10 +83,6 @@ basic-auth@~2.0.0:
   dependencies:
     safe-buffer "5.1.2"
 
-bluebird@^3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.4.tgz#d6cc661595de30d5b3af5fcedd3c0b3ef6ec5714"
-
 body-parser@1.18.3, body-parser@^1.18.3:
   version "1.18.3"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.3.tgz#5b292198ffdd553b3a0f20ded0592b956955c8b4"
@@ -537,19 +533,12 @@ node-jose@^1.1.3:
     uuid "^3.3.2"
 
 node-my-info-sg@../:
-  version "1.0.4"
+  version "1.0.5"
   dependencies:
-    bluebird "^3.5.4"
     jsonwebtoken "^8.5.1"
     lodash "^4.17.11"
     node-jose "^1.1.3"
-    nonce "^1.0.4"
     superagent "^5.0.2"
-    superagent-bluebird-promise "^4.2.0"
-
-nonce@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/nonce/-/nonce-1.0.4.tgz#ee7302ade8c1bef476f301b8c91f5cc51a487612"
 
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
@@ -814,10 +803,6 @@ string_decoder@^1.1.1:
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.2.0.tgz#fe86e738b19544afe70469243b2a1ee9240eae8d"
   dependencies:
     safe-buffer "~5.1.0"
-
-superagent-bluebird-promise@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/superagent-bluebird-promise/-/superagent-bluebird-promise-4.2.0.tgz#0b6a6872cc830371cb9f4172dd0510751abd16b2"
 
 superagent@^5.0.2:
   version "5.0.5"

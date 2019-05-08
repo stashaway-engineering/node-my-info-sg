@@ -16,21 +16,21 @@ function getQueryParamFromURL(url, key) {
 
 async function runSingpassMockOAuthFlow(page, url, callbackUrl) {
   await page.goto(url);
-  await page.waitFor('#salutationCode')
-  await page.evaluate(() => { document.getElementById('salutationCode').selectedIndex = 2 });
-  await page.click('#accountBtn')
+  await page.waitFor('#salutationCode');
+  await page.evaluate(() => { document.getElementById('salutationCode').selectedIndex = 2; });
+  await page.click('#accountBtn');
 
-  await page.waitFor('button#allow')
+  await page.waitFor('button#allow');
   const [request] = await Promise.all([
-    page.waitForRequest((request) => _.startsWith(request.url(), callbackUrl)),
+    page.waitForRequest((_request) => _.startsWith(_request.url(), callbackUrl)),
     page.click('button#allow'),
   ]);
   const resultUrl = request.url();
 
   const state = getQueryParamFromURL(resultUrl, 'state');
   const code = getQueryParamFromURL(resultUrl, 'code');
-  return { state, code }
-};
+  return { state, code };
+}
 
 async function testFullMyInfoFlow({
   page,
@@ -52,7 +52,7 @@ async function testFullMyInfoFlow({
     clientId,
     clientSecret,
     redirectUrl,
-  })
+  });
 
 
   const { authoriseUrl, state } = client.getAuthoriseUrl(purpose, attributes);
@@ -65,7 +65,7 @@ ${baseUrl}/com/v3/authorise?client_id=${clientId}\
 &redirect_uri=${redirectUrl}`);
 
 
-  const { code } = await runSingpassMockOAuthFlow(page, authoriseUrl, redirectUrl)
+  const { code } = await runSingpassMockOAuthFlow(page, authoriseUrl, redirectUrl);
   // Oauth flow should returns an authorization_code
   expect(typeof code).toEqual('string');
 
@@ -75,8 +75,8 @@ ${baseUrl}/com/v3/authorise?client_id=${clientId}\
 
   const { person } = await client.getPerson(accessToken, attributes);
   // client.getPerson should a person object with all requested properties
-  for (let attribute of attributes) {
-    expect(person).toHaveProperty(attribute);
+  for (let i = 0; i < attributes.length; i += 1) {
+    expect(person).toHaveProperty(attributes[i]);
   }
 }
 
