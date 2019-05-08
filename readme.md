@@ -1,5 +1,6 @@
 # node-my-info-sg 🇸🇬
 
+[![npm version](https://badge.fury.io/js/node-my-info-sg.svg)](https://badge.fury.io/js/node-my-info-sg) [![CircleCI](https://circleci.com/gh/stashaway-engineering/node-my-info-sg.svg?style=svg)](https://circleci.com/gh/stashaway-engineering/node-my-info-sg)
 
 Small wrapper around Singapore [MyInfo V3 API](https://www.ndi-api.gov.sg/library/trusted-data/myinfo/introduction) for node JS. Wraps the scary-scary 😱 security logic into easy to use APIs
 
