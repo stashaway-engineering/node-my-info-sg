@@ -59,7 +59,14 @@ Lightly refactored from the [excellent official example](https://github.com/ndi-
 		// Now you can use the person object to pre-fill your form!
 		.then(({ person }) => console.log(JSON.stringify(person))); 
 	```
+  
 	
+## Test
+	
+```js
+yarn test
+```
+
 ## Example
 	
 In the example directory, run:
@@ -71,5 +78,5 @@ yarn install
 
 ## Future Improvement
 
-1. Add unit tests and sensible linting rules
+1. Add sensible linting rules
 1. Pass this repository to the cool government guy, so they can maintain it

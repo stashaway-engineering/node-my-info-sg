@@ -4,9 +4,11 @@
   "description": "",
   "main": "lib/client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:coverage": "jest --coverage --collectCoverageFrom='[\"**/src/**/*.js\", \"!**/examples/**\",\"!**/components/**\",\"!**/constants/**\"]'",
+    "test:watch": "jest --watch"
   },
-  "author": "",
+  "author": "StashAway",
   "repository": {
     "type": "git",
     "url": "https://github.com/stashaway-engineering/node-my-info-sg.git"
@@ -23,5 +25,22 @@
     "nonce": "^1.0.4",
     "superagent": "^5.0.2",
     "superagent-bluebird-promise": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/preset-env": "^7.4.4",
+    "jest": "^24.8.0",
+    "jest-watch-typeahead": "^0.3.1",
+    "puppeteer": "^1.15.0",
+    "sinon": "^7.3.2"
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)(spec|test).js?(x)"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
   }
 }
