@@ -14,13 +14,17 @@ function getQueryParamFromURL(url, key) {
   return _.get(queryParams, key);
 }
 
-async function runSingpassMockOAuthFlow(page, url, callbackUrl) {
-  await page.goto(url);
+async function runMockpassOAuthFlow(page, authoriseUrl, callbackUrl) {
+  // Visit authoriseUrl login with the second user on the dropdown
+  await page.goto(authoriseUrl);
   await page.waitFor('#salutationCode');
   await page.evaluate(() => { document.getElementById('salutationCode').selectedIndex = 2; });
   await page.click('#accountBtn');
 
+  // Wait until allow permission button is visible
   await page.waitFor('button#allow');
+
+  // Click on allow permission and wait for redirection to callbackUrl
   const [request] = await Promise.all([
     page.waitForRequest((_request) => _.startsWith(_request.url(), callbackUrl)),
     page.click('button#allow'),
@@ -65,8 +69,8 @@ ${baseUrl}/com/v3/authorise?client_id=${clientId}\
 &redirect_uri=${redirectUrl}`);
 
 
-  const { code } = await runSingpassMockOAuthFlow(page, authoriseUrl, redirectUrl);
-  // Oauth flow should returns an authorization_code
+  const { code } = await runMockpassOAuthFlow(page, authoriseUrl, redirectUrl);
+  // OAuth flow should returns an authorization_code
   expect(typeof code).toEqual('string');
 
   const { accessToken } = await client.getToken(code);

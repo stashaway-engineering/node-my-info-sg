@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/node-my-info-sg.svg)](https://badge.fury.io/js/node-my-info-sg) [![CircleCI](https://circleci.com/gh/stashaway-engineering/node-my-info-sg.svg?style=svg)](https://circleci.com/gh/stashaway-engineering/node-my-info-sg)
 
-Small wrapper around Singapore [MyInfo V3 API](https://www.ndi-api.gov.sg/library/trusted-data/myinfo/introduction) for node JS. Wraps the scary-scary 😱 security logic into easy to use APIs
+Small wrapper around Singapore [MyInfo V3 API](https://www.ndi-api.gov.sg/library/trusted-data/myinfo/introduction) for node JS. Wraps the scary-scary 😱 security logic into easy to use APIs. 
 
 Lightly refactored from the [excellent official example](https://github.com/ndi-trusted-data/myinfo-demo-app) 🎉
 
@@ -40,10 +40,11 @@ Lightly refactored from the [excellent official example](https://github.com/ndi-
 	```
 
 1. **Generate the OAuth2 url**
-
+	
 	```js
-	var { authoriseUrl, state } = myInfoClient.getAuthoriseUrl(purpose, attributes);
-	// Then you can pass authoriseUrl to your frontend app and redirect the user 
+	const attributes = ['uinfin', 'name', 'mobileno'];
+	const { authoriseUrl, state } = myInfoClient.getAuthoriseUrl(purpose, attributes);
+	// Then you can pass authoriseUrl to your frontend app
 	// (or open authoriseUrl on a WebView on your mobile apps)
 	//
 	// Note: You might want to store authoriseUrl, attributes, and state to fulfill the transaction log requirements
@@ -54,19 +55,15 @@ Lightly refactored from the [excellent official example](https://github.com/ndi-
 
 	```js	
 	// Exchange authorisation code with usable access token
-	myInfoClient.getToken(code)
-		// Get the person object
-		.then(({ accessToken }) => myInfoClient.getPerson(accessToken, _attributes)) 
-		// Now you can use the person object to pre-fill your form!
-		.then(({ person }) => console.log(JSON.stringify(person))); 
+	const { accessToken } = await myInfoClient.getToken(code);
+	  
+	// Get the person object
+	// Make sure attributes is the same as the one requested in previous step!
+	const { person } = await myInfoClient.getPerson(accessToken, attributes)
+	  
+	// Now you can return the person object to your frontend and pre-fill your form!
+	console.log(JSON.stringify(person)); 
 	```
-  
-	
-## Test
-	
-```js
-yarn test
-```
 
 ## Example
 	
@@ -76,8 +73,11 @@ In the example directory, run:
 yarn install
 ./start.sh
 ```
-
-## Future Improvement
-
-1. Add sensible linting rules
-1. Pass this repository to the cool government guy, so they can maintain it
+  
+	
+## Unit test
+	
+```js
+yarn lint
+yarn test
+```
