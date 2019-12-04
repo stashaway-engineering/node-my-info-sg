@@ -17,6 +17,7 @@ function getQueryParamFromURL(url, key) {
 async function runMockpassOAuthFlow(page, authoriseUrl, callbackUrl) {
   // Visit authoriseUrl login with the second user on the dropdown
   await page.goto(authoriseUrl);
+
   await page.waitFor('#salutationCode');
   await page.evaluate(() => { document.getElementById('salutationCode').selectedIndex = 2; });
   await page.click('#accountBtn');
@@ -47,6 +48,7 @@ async function testFullMyInfoFlow({
   clientId,
   clientSecret,
   redirectUrl,
+  overrideRedirectUrl,
 }) {
   const client = new MyInfoClient({
     baseUrl,
@@ -58,22 +60,24 @@ async function testFullMyInfoFlow({
     redirectUrl,
   });
 
+  const actualRedirectUrl = overrideRedirectUrl || redirectUrl;
 
-  const { authoriseUrl, state } = client.getAuthoriseUrl(purpose, attributes);
+  const { authoriseUrl, state } = client.getAuthoriseUrl(purpose, attributes, overrideRedirectUrl);
   // client.getAuthoriseUrl should construct a authoriseUrl
+
   expect(authoriseUrl).toEqual(`\
 ${baseUrl}/com/v3/authorise?client_id=${clientId}\
 &attributes=${attributes.join(',')}\
 &purpose=${purpose}\
 &state=${state}\
-&redirect_uri=${redirectUrl}`);
+&redirect_uri=${actualRedirectUrl}`);
 
 
-  const { code } = await runMockpassOAuthFlow(page, authoriseUrl, redirectUrl);
+  const { code } = await runMockpassOAuthFlow(page, authoriseUrl, actualRedirectUrl);
   // OAuth flow should returns an authorization_code
   expect(typeof code).toEqual('string');
 
-  const { accessToken } = await client.getToken(code);
+  const { accessToken } = await client.getToken(code, overrideRedirectUrl);
   // client.getToken should returns an accessToken
   expect(typeof accessToken).toEqual('string');
 
@@ -98,18 +102,27 @@ describe('node-my-info-sg', () => {
   afterAll(async () => { await browser.close(); });
 
   describe('on sandbox environment (no PKI digital signature)', () => {
+    const baseParams = {
+      purpose: ' signing up with MyInfo',
+      attributes: ['uinfin', 'name', 'mobileno'],
+      baseUrl: 'https://sandbox.api.myinfo.gov.sg',
+      authLevel: 'L0',
+      publicCertPath: './example/ssl/stg-auth-signing-public.pem',
+      privateKeyPath: './example/ssl/stg-demoapp-client-privatekey-2018.pem',
+      clientId: 'STG2-MYINFO-SELF-TEST',
+      clientSecret: '44d953c796cccebcec9bdc826852857ab412fbe2',
+      redirectUrl: 'http://localhost:3001/callback',
+    };
+
     it('handles the full MyInfo flow', () => {
+      return testFullMyInfoFlow({ ...baseParams, page });
+    });
+
+    it('handles the full MyInfo flow with when overriding the redirectUrl', () => {
       return testFullMyInfoFlow({
+        ...baseParams,
         page,
-        purpose: ' signing up with MyInfo',
-        attributes: ['uinfin', 'name', 'mobileno'],
-        baseUrl: 'https://sandbox.api.myinfo.gov.sg',
-        authLevel: 'L0',
-        publicCertPath: './example/ssl/stg-auth-signing-public.pem',
-        privateKeyPath: './example/ssl/stg-demoapp-client-privatekey-2018.pem',
-        clientId: 'STG2-MYINFO-SELF-TEST',
-        clientSecret: '44d953c796cccebcec9bdc826852857ab412fbe2',
-        redirectUrl: 'http://localhost:3001/callback',
+        overrideRedirectUrl: 'http://localhost:3001/callback',
       });
     });
   });
