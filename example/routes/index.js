@@ -68,6 +68,11 @@ router.get('/callback', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../views/html/index.html'));
 });
 
+// callback function (different url) - directs back to home page
+router.get('/custom/callback', function(req, res, next) {
+  res.sendFile(path.join(__dirname + '/../views/html/index.html'));
+});
+
 // function for getting environment variables to the frontend
 router.get('/getAuthoriseUrl', function(req, res, next) {
   var purpose = 'demonstrating MyInfo APIs'
