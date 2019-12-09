@@ -18,17 +18,17 @@ async function runMockpassOAuthFlow(page, authoriseUrl, callbackUrl) {
   // Visit authoriseUrl login with the second user on the dropdown
   await page.goto(authoriseUrl);
 
-  await page.waitFor('#salutationCode');
-  await page.evaluate(() => { document.getElementById('salutationCode').selectedIndex = 2; });
-  await page.click('#accountBtn');
+  await page.waitFor('select[name=userId]');
+  await page.evaluate(() => { document.getElementsByName('userId').selectedIndex = 2; });
+  await page.click('button.btn.btn-danger');
 
   // Wait until allow permission button is visible
-  await page.waitFor('button#allow');
+  await page.waitFor('#allow');
 
   // Click on allow permission and wait for redirection to callbackUrl
   const [request] = await Promise.all([
     page.waitForRequest((_request) => _.startsWith(_request.url(), callbackUrl)),
-    page.click('button#allow'),
+    page.click('#allow'),
   ]);
   const resultUrl = request.url();
 
