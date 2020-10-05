@@ -18,8 +18,8 @@ async function runMockpassOAuthFlow(page, authoriseUrl, callbackUrl) {
   // Visit authoriseUrl login with the second user on the dropdown
   await page.goto(authoriseUrl);
 
-  await page.waitFor('[name="userId"]');
-  await page.evaluate(() => { document.querySelector('[name="userId"]').selectedIndex = 2; });
+  await page.waitFor('[name="code"]');
+  await page.evaluate(() => { document.querySelector('[name="code"]').selectedIndex = 2; });
 
   await page.click('button.btn-danger');
 
