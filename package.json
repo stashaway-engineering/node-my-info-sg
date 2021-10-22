@@ -7,7 +7,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage --collectCoverageFrom='[\"**/src/**/*.js\", \"!**/examples/**\",\"!**/components/**\",\"!**/constants/**\"]'",
     "test:watch": "jest --watch",
-    "lint": "eslint --ext .js ."
+    "lint": "eslint --ext .js .",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "author": "StashAway",
   "repository": {
@@ -22,7 +24,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
     "node-jose": "^2.0.0",
-    "superagent": "^5.0.2"
+    "superagent": "^5.0.2",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
@@ -46,5 +49,6 @@
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
     ]
-  }
+  },
+  "snyk": true
 }
