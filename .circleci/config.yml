@@ -1,20 +1,39 @@
-version: 2
+version: 2.1
+
+workflows:
+  all-tests:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              node-version:
+                - 12.22-browsers # latest 12.x
+                - 14.19-browsers # latest 14.x
+                - 14.17.5-browsers # appserver uses this (as of 28th March 2022)
+                - 16.4-browsers # latest 16.x
+                - lts-browsers # current lts (may be 20th at the time you are reading this)
+                - current-browsers # latest
+
 jobs:
   build:
+    parameters:
+      node-version:
+        type: string
     docker:
-      - image: circleci/node:latest-browsers
+      - image: cimg/node:<< parameters.node-version >>
     steps:
       - checkout
+      - run: node --version
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ parameters.node-version }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ parameters.node-version }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - run: yarn lint
