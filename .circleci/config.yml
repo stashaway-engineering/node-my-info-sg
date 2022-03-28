@@ -7,6 +7,7 @@ workflows:
           matrix:
             parameters:
               node-version:
+                - 10.24-browsers # latest 10.x
                 - 12.22-browsers # latest 12.x
                 - 14.19-browsers # latest 14.x
                 - 14.17.5-browsers # appserver uses this (as of 28th March 2022)
