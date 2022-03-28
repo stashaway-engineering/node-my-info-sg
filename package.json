@@ -24,6 +24,9 @@
     "lodash": "^4.17.11",
     "superagent": "^5.0.2"
   },
+  "engines": {
+    "node": ">=10"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.4.4",
