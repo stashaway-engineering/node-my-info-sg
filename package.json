@@ -7,7 +7,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage --collectCoverageFrom='[\"**/src/**/*.js\", \"!**/examples/**\",\"!**/components/**\",\"!**/constants/**\"]'",
     "test:watch": "jest --watch",
-    "lint": "eslint --ext .js ."
+    "lint": "eslint --ext .js .",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "author": "StashAway",
   "repository": {
@@ -21,8 +23,9 @@
   "dependencies": {
     "jose": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.11",
-    "superagent": "^5.0.2"
+    "lodash": "^4.17.21",
+    "superagent": "^5.0.2",
+    "@snyk/protect": "latest"
   },
   "engines": {
     "node": ">=12"
@@ -31,13 +34,13 @@
     "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.4.4",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
+    "eslint": "^7.0.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "jest": "^27.5.1",
-    "jest-watch-typeahead": "^0.3.1",
+    "jest-watch-typeahead": "^0.5.0",
     "puppeteer": "^1.15.0",
     "sinon": "^7.3.2"
   },
@@ -49,5 +52,6 @@
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
     ]
-  }
+  },
+  "snyk": true
 }
