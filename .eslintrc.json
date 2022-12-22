@@ -3,7 +3,7 @@
   "plugins": [
     "react"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "globals": {
     "it": false,
     "xit": false,

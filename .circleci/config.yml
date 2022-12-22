@@ -11,6 +11,7 @@ workflows:
                 - 14.19-browsers # latest 14.x
                 - 14.17.5-browsers # appserver uses this (as of 28th March 2022)
                 - 16.4-browsers # latest 16.x
+                - 18.12-browsers # latest 18.x
                 - lts-browsers # current lts (may be 20th at the time you are reading this)
                 - current-browsers # latest
 

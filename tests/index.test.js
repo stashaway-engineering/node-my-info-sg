@@ -73,7 +73,6 @@ ${baseUrl}/com/v3/authorise?client_id=${clientId}\
 &state=${state}\
 &redirect_uri=${actualRedirectUrl}`);
 
-
   const { code } = await runMockpassOAuthFlow(page, authoriseUrl, actualRedirectUrl);
   // OAuth flow should returns an authorization_code
   expect(typeof code).toEqual('string');
