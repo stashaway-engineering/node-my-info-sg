@@ -36,9 +36,9 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "jest": "^27.5.1",
+    "jest": "^28.0.0",
     "jest-watch-typeahead": "^0.3.1",
-    "puppeteer": "^1.15.0",
+    "puppeteer": "^22.6.4",
     "sinon": "^7.3.2"
   },
   "jest": {
