@@ -1,0 +1,80 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@babel/core > lodash':
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: '@babel/core > lodash'
+    - eslint > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint > lodash
+    - eslint-plugin-import > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint-plugin-import > lodash
+    - '@babel/preset-env > @babel/plugin-transform-block-scoping > lodash':
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: '@babel/preset-env > @babel/plugin-transform-block-scoping > lodash'
+    - eslint > table > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint > table > lodash
+    - eslint > inquirer > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint > inquirer > lodash
+    - '@babel/preset-env > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          @babel/preset-env > @babel/helper-module-imports > @babel/types >
+          lodash
+    - '@babel/core > @babel/helpers > @babel/traverse > @babel/generator > lodash':
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          @babel/core > @babel/helpers > @babel/traverse > @babel/generator >
+          lodash
+    - '@babel/preset-env > @babel/plugin-proposal-async-generator-functions > @babel/helper-remap-async-to-generator > @babel/helper-wrap-function > @babel/traverse > lodash':
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          @babel/preset-env > @babel/plugin-proposal-async-generator-functions >
+          @babel/helper-remap-async-to-generator > @babel/helper-wrap-function >
+          @babel/traverse > lodash
+    - jest > @jest/core > @jest/reporters > @jest/transform > @babel/core > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          jest > @jest/core > @jest/reporters > @jest/transform > @babel/core >
+          lodash
+    - '@babel/preset-env > @babel/plugin-proposal-async-generator-functions > @babel/helper-remap-async-to-generator > @babel/helper-wrap-function > @babel/traverse > @babel/generator > lodash':
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          @babel/preset-env > @babel/plugin-proposal-async-generator-functions >
+          @babel/helper-remap-async-to-generator > @babel/helper-wrap-function >
+          @babel/traverse > @babel/generator > lodash
+    - jest > @jest/core > @jest/reporters > @jest/transform > @babel/core > @babel/generator > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          jest > @jest/core > @jest/reporters > @jest/transform > @babel/core >
+          @babel/generator > lodash
+    - jest > @jest/core > @jest/reporters > @jest/transform > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          jest > @jest/core > @jest/reporters > @jest/transform > @babel/core >
+          @babel/helpers > @babel/traverse > lodash
+    - jest > @jest/core > @jest/reporters > @jest/transform > @babel/core > @babel/helpers > @babel/traverse > @babel/generator > lodash:
+        patched: '2024-07-22T10:24:53.468Z'
+        id: SNYK-JS-LODASH-567746
+        path: >-
+          jest > @jest/core > @jest/reporters > @jest/transform > @babel/core >
+          @babel/helpers > @babel/traverse > @babel/generator > lodash
