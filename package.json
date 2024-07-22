@@ -1,6 +1,6 @@
 {
-  "name": "node-my-info-sg",
-  "version": "2.0.0",
+  "name": "sa-node-my-info-sg",
+  "version": "2.0.1",
   "description": "",
   "main": "lib/client.js",
   "scripts": {
